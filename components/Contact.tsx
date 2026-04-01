@@ -30,46 +30,45 @@ type InfoCardProps = {
 
 export default function Contact() {
   return (
-    <section className="relative py-28 overflow-hidden">
+    <section className="relative py-20 md:py-28 w-full overflow-hidden">
       
       {/* 🌌 BACKGROUND */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-0 w-[600px] h-[600px] -translate-x-1/2 bg-emerald-500/10 blur-[160px] rounded-full" />
+        <div className="absolute left-1/2 top-0 w-[400px] md:w-[600px] h-[400px] md:h-[600px] -translate-x-1/2 bg-emerald-500/10 blur-[160px] rounded-full" />
       </div>
 
-      <div className="container-custom">
+      <div className="container-custom w-full">
         
         {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="text-center mb-20"
+          className="text-center mb-14 md:mb-20"
         >
-          <h2 className="text-4xl font-bold text-gradient">
+          <h2 className="text-3xl md:text-4xl font-bold text-gradient">
             Let’s Work Together
           </h2>
-          <p className="text-muted mt-2">
+          <p className="text-muted mt-2 max-w-md mx-auto">
             Ready to deliver exceptional customer experiences for your business.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16">
+        {/* GRID */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 w-full">
           
           {/* 📩 FORM */}
           <motion.form
             initial={{ opacity: 0, x: -60 }}
             whileInView={{ opacity: 1, x: 0 }}
-            className="card space-y-6"
+            className="card w-full space-y-6"
           >
             <Input label="Full Name" placeholder="John Doe" />
             <Input label="Email" placeholder="you@email.com" />
             <Input label="Subject" placeholder="Project Inquiry" />
             <Textarea label="Message" placeholder="Write your message..." />
 
-            {/* Submit Button */}
             <MagneticButton />
 
-            {/* 💬 WhatsApp CTA */}
             <motion.a
               href="https://wa.me/254750468852?text=Hello%20I%20am%20interested%20in%20your%20customer%20care%20services"
               target="_blank"
@@ -81,38 +80,18 @@ export default function Contact() {
             </motion.a>
           </motion.form>
 
-          {/* 📞 CONTACT INFO */}
+          {/* 📞 INFO */}
           <motion.div
             initial={{ opacity: 0, x: 60 }}
             whileInView={{ opacity: 1, x: 0 }}
-            className="space-y-6"
+            className="space-y-5 md:space-y-6 w-full"
           >
-            <InfoCard
-              icon={<Mail />}
-              title="Email"
-              value="your@email.com"
-            />
+            <InfoCard icon={<Mail />} title="Email" value="your@email.com" />
+            <InfoCard icon={<Phone />} title="Phone" value="+254 XXX XXX XXX" />
+            <InfoCard icon={<MapPin />} title="Location" value="Nairobi, Kenya" />
+            <InfoCard icon={"💬"} title="WhatsApp" value="+254 750 468852" />
 
-            <InfoCard
-              icon={<Phone />}
-              title="Phone"
-              value="+254 XXX XXX XXX"
-            />
-
-            <InfoCard
-              icon={<MapPin />}
-              title="Location"
-              value="Nairobi, Kenya"
-            />
-
-            <InfoCard
-              icon={"💬"}
-              title="WhatsApp"
-              value="+254 750 468852"
-            />
-
-            {/* CTA CARD */}
-            <div className="card mt-10 text-center">
+            <div className="card mt-6 md:mt-10 text-center w-full">
               <p className="text-muted mb-4">
                 Available for freelance & full-time roles
               </p>
@@ -128,12 +107,12 @@ export default function Contact() {
 }
 
 /* =========================
-   ✏️ INPUT COMPONENT
+   INPUT
 ========================= */
 
 function Input({ label, placeholder }: InputProps) {
   return (
-    <div>
+    <div className="w-full">
       <label className="text-sm text-gray-400">{label}</label>
       <input
         placeholder={placeholder}
@@ -144,12 +123,12 @@ function Input({ label, placeholder }: InputProps) {
 }
 
 /* =========================
-   📝 TEXTAREA
+   TEXTAREA
 ========================= */
 
 function Textarea({ label, placeholder }: TextareaProps) {
   return (
-    <div>
+    <div className="w-full">
       <label className="text-sm text-gray-400">{label}</label>
       <textarea
         rows={5}
@@ -161,14 +140,14 @@ function Textarea({ label, placeholder }: TextareaProps) {
 }
 
 /* =========================
-   📞 INFO CARD
+   INFO CARD
 ========================= */
 
 function InfoCard({ icon, title, value }: InfoCardProps) {
   return (
     <motion.div
-      whileHover={{ scale: 1.03 }}
-      className="card flex items-center gap-4"
+      whileHover={{ scale: 1.02 }}
+      className="card w-full flex items-center gap-4"
     >
       <div className="p-3 bg-emerald-500/10 rounded-lg text-emerald-400">
         {icon}
@@ -182,7 +161,7 @@ function InfoCard({ icon, title, value }: InfoCardProps) {
 }
 
 /* =========================
-   🧲 MAGNETIC BUTTON
+   BUTTON
 ========================= */
 
 function MagneticButton() {

@@ -69,41 +69,41 @@ const experiences: ExperienceItem[] = [
 
 export default function Experience() {
   return (
-    <section className="relative py-24">
+    <section className="relative py-20 md:py-24 w-full">
       
-      {/* 🌌 Background glow */}
+      {/* 🌌 Background */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute right-1/4 top-0 w-[500px] h-[500px] bg-emerald-500/10 blur-[140px] rounded-full" />
+        <div className="absolute right-1/4 top-0 w-[400px] h-[400px] bg-emerald-500/10 blur-[120px] rounded-full" />
       </div>
 
-      <div className="container-custom">
+      <div className="container-custom w-full">
         
         {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="mb-20"
+          className="mb-14 md:mb-20 text-center md:text-left"
         >
-          <h2 className="text-4xl font-bold text-gradient">
+          <h2 className="text-3xl md:text-4xl font-bold text-gradient">
             Experience
           </h2>
-          <p className="text-muted mt-2">
+          <p className="text-muted mt-2 max-w-md mx-auto md:mx-0">
             Proven results through real customer interactions and measurable impact.
           </p>
         </motion.div>
 
-        {/* Timeline */}
+        {/* Timeline Wrapper */}
         <div className="relative">
           
-          {/* Animated vertical line */}
+          {/* ✅ Vertical line (ONLY DESKTOP) */}
           <motion.div
             initial={{ height: 0 }}
             whileInView={{ height: "100%" }}
             transition={{ duration: 1.5 }}
-            className="absolute left-5 top-0 w-[2px] bg-gradient-to-b from-emerald-500 via-emerald-400 to-transparent"
+            className="hidden md:block absolute left-6 top-0 w-[2px] bg-gradient-to-b from-emerald-500 via-emerald-400 to-transparent"
           />
 
-          <div className="space-y-16">
+          <div className="space-y-12 md:space-y-16">
             {experiences.map((exp, i) => (
               <TimelineItem key={i} exp={exp} index={i} />
             ))}
@@ -123,31 +123,31 @@ function TimelineItem({ exp, index }: TimelineItemProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: -80 }}
-      whileInView={{ opacity: 1, x: 0 }}
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.2 }}
       viewport={{ once: true }}
-      className="relative flex items-start gap-6 group"
+      className="relative flex flex-col md:flex-row items-start gap-4 md:gap-6"
     >
-      {/* Timeline Node */}
-      <div className="relative z-10">
+      {/* ✅ NODE (ONLY DESKTOP) */}
+      <div className="hidden md:block relative z-10">
         <div className="w-10 h-10 flex items-center justify-center rounded-full bg-emerald-500/20 border border-emerald-400 glow-sm">
           <Briefcase className="text-emerald-400" size={18} />
         </div>
-
-        <div className="absolute inset-0 rounded-full bg-emerald-500/30 blur-lg opacity-0 group-hover:opacity-100 transition" />
       </div>
 
-      {/* Card */}
+      {/* ✅ CARD FULL WIDTH */}
       <motion.div
-        whileHover={{ scale: 1.02, y: -6 }}
-        className="card flex-1 cursor-pointer"
+        whileHover={{ scale: 1.02, y: -4 }}
+        className="card w-full cursor-pointer"
         onClick={() => setOpen((prev) => !prev)}
       >
         {/* Header */}
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
           <div>
-            <h3 className="text-lg font-semibold">{exp.role}</h3>
+            <h3 className="text-base md:text-lg font-semibold">
+              {exp.role}
+            </h3>
 
             <div className="flex items-center gap-2 text-emerald-400 text-sm mt-1">
               <Building2 size={16} />
@@ -155,7 +155,7 @@ function TimelineItem({ exp, index }: TimelineItemProps) {
             </div>
           </div>
 
-          <span className="text-sm text-gray-400">
+          <span className="text-xs sm:text-sm text-gray-400">
             {exp.period}
           </span>
         </div>
@@ -173,7 +173,7 @@ function TimelineItem({ exp, index }: TimelineItemProps) {
           </motion.div>
         </div>
 
-        {/* Expandable Achievements */}
+        {/* Expand */}
         <motion.div
           initial={{ height: 0, opacity: 0 }}
           animate={{

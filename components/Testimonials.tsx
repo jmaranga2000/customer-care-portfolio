@@ -35,7 +35,7 @@ const testimonials: Testimonial[] = [
   {
     name: "Jane Mwangi",
     role: "Customer",
-    image: "/clients/client1.jpg",
+    image: "/client1.jpeg",
     message:
       "Very professional and patient. My issue was resolved quickly and efficiently.",
     rating: 5,
@@ -43,7 +43,7 @@ const testimonials: Testimonial[] = [
   {
     name: "David Otieno",
     role: "Supervisor",
-    image: "/clients/client2.jpg",
+    image: "/client2.jpeg",
     message:
       "Excellent communication and dedication to customer satisfaction.",
     rating: 5,
@@ -51,7 +51,7 @@ const testimonials: Testimonial[] = [
   {
     name: "Brian Kamau",
     role: "Client",
-    image: "/clients/client3.jpg",
+    image: "/client3.jpeg",
     message:
       "One of the best support experiences I've had. Highly recommended.",
     rating: 5,
@@ -74,33 +74,37 @@ export default function Testimonials() {
   }, []);
 
   return (
-    <section className="relative py-28 overflow-hidden">
+    <section className="relative py-20 md:py-28 w-full overflow-hidden">
       
-      {/* Background Glow */}
+      {/* 🌌 Background */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-0 w-[600px] h-[600px] -translate-x-1/2 bg-emerald-500/10 blur-[160px] rounded-full" />
+        <div className="absolute left-1/2 top-0 w-[400px] md:w-[600px] h-[400px] md:h-[600px] -translate-x-1/2 bg-emerald-500/10 blur-[160px] rounded-full" />
       </div>
 
-      <div className="container-custom text-center">
+      <div className="container-custom w-full text-center">
         
         {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="mb-20"
+          className="mb-14 md:mb-20"
         >
-          <h2 className="text-4xl font-bold text-gradient">
+          <h2 className="text-3xl md:text-4xl font-bold text-gradient">
             Testimonials
           </h2>
-          <p className="text-muted mt-2">
+          <p className="text-muted mt-2 max-w-md mx-auto">
             Real feedback from clients and teams I&apos;ve worked with.
           </p>
         </motion.div>
 
-        {/* Stack */}
-        <div className="relative flex items-center justify-center">
-          <div className="relative w-full max-w-2xl h-[300px]">
-            
+        {/* ✅ MOBILE: SIMPLE CARD */}
+        <div className="block md:hidden">
+          <MobileCard item={testimonials[index]} />
+        </div>
+
+        {/* ✅ DESKTOP: STACK */}
+        <div className="hidden md:flex items-center justify-center">
+          <div className="relative w-full max-w-3xl h-[320px]">
             <AnimatePresence mode="popLayout">
               {testimonials.map((item, i) => {
                 const position =
@@ -108,11 +112,7 @@ export default function Testimonials() {
                   testimonials.length;
 
                 return (
-                  <Card
-                    key={i}
-                    item={item}
-                    position={position}
-                  />
+                  <Card key={i} item={item} position={position} />
                 );
               })}
             </AnimatePresence>
@@ -124,7 +124,6 @@ export default function Testimonials() {
           {testimonials.map((_, i) => (
             <button
               key={i}
-              title="View Testimonial"
               onClick={() => setIndex(i)}
               className={`w-3 h-3 rounded-full transition ${
                 i === index ? "bg-emerald-400" : "bg-gray-700"
@@ -138,7 +137,45 @@ export default function Testimonials() {
 }
 
 /* =========================
-   CARD
+   📱 MOBILE CARD
+========================= */
+
+function MobileCard({ item }: { item: Testimonial }) {
+  return (
+    <div className="card w-full max-w-md mx-auto p-6 text-center">
+      
+      <div className="w-16 h-16 mx-auto mb-4 rounded-full overflow-hidden border border-emerald-400">
+        <Image
+          src={item.image}
+          alt={item.name}
+          width={64}
+          height={64}
+          className="object-cover"
+        />
+      </div>
+
+      <div className="flex justify-center mb-3">
+        {Array.from({ length: item.rating }).map((_, i) => (
+          <Star
+            key={i}
+            className="text-emerald-400 fill-emerald-400"
+            size={16}
+          />
+        ))}
+      </div>
+
+      <p className="text-gray-200 italic text-sm">
+        “{item.message}”
+      </p>
+
+      <h4 className="mt-4 font-semibold">{item.name}</h4>
+      <p className="text-sm text-gray-400">{item.role}</p>
+    </div>
+  );
+}
+
+/* =========================
+   🧊 DESKTOP CARD
 ========================= */
 
 function Card({ item, position }: CardProps) {
@@ -162,12 +199,7 @@ function Card({ item, position }: CardProps) {
     y.set(0);
   }
 
-  const styles: Array<{
-    scale: number;
-    opacity: number;
-    zIndex: number;
-    y: number;
-  }> = [
+  const styles = [
     { scale: 1, opacity: 1, zIndex: 3, y: 0 },
     { scale: 0.9, opacity: 0.5, zIndex: 2, y: 20 },
     { scale: 0.8, opacity: 0.3, zIndex: 1, y: 40 },
@@ -191,51 +223,36 @@ function Card({ item, position }: CardProps) {
     >
       <div className="card relative text-center p-8">
         
-        {/* Glow */}
         <div className="absolute inset-0 bg-emerald-500/10 blur-xl rounded-2xl" />
 
         <div className="relative z-10">
           
-          {/* Avatar */}
-          <div className="relative w-16 h-16 mx-auto mb-4 rounded-full overflow-hidden border border-emerald-400">
+          <div className="w-16 h-16 mx-auto mb-4 rounded-full overflow-hidden border border-emerald-400">
             <Image
               src={item.image}
               alt={item.name}
-              fill
+              width={64}
+              height={64}
               className="object-cover"
             />
           </div>
 
-          {/* Stars */}
           <div className="flex justify-center mb-3">
             {Array.from({ length: item.rating }).map((_, i) => (
-              <motion.div
+              <Star
                 key={i}
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: i * 0.1 }}
-              >
-                <Star
-                  className="text-emerald-400 fill-emerald-400"
-                  size={18}
-                />
-              </motion.div>
+                className="text-emerald-400 fill-emerald-400"
+                size={18}
+              />
             ))}
           </div>
 
-          {/* Message */}
           <p className="text-gray-200 italic">
             “{item.message}”
           </p>
 
-          {/* Name */}
-          <h4 className="mt-4 font-semibold">
-            {item.name}
-          </h4>
-
-          <p className="text-sm text-gray-400">
-            {item.role}
-          </p>
+          <h4 className="mt-4 font-semibold">{item.name}</h4>
+          <p className="text-sm text-gray-400">{item.role}</p>
         </div>
       </div>
     </motion.div>

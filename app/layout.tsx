@@ -6,7 +6,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-// Font setup
+// Font
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -16,20 +16,6 @@ export const metadata: Metadata = {
   title: "Customer Care Portfolio",
   description:
     "Professional Customer Care Representative portfolio showcasing skills, experience, and client-focused solutions.",
-  keywords: [
-    "Customer Care",
-    "Customer Support",
-    "Help Desk",
-    "Client Service",
-    "Portfolio",
-  ],
-  authors: [{ name: "Your Name" }],
-  openGraph: {
-    title: "Customer Care Portfolio",
-    description:
-      "Delivering exceptional customer experiences with empathy and efficiency.",
-    type: "website",
-  },
 };
 
 export default function RootLayout({
@@ -38,31 +24,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body
-        className={`${inter.variable} font-sans bg-black text-white antialiased`}
+        className={`${inter.variable} font-sans bg-black text-white antialiased overflow-x-hidden`}
       >
-        {/* 🌌 GLOBAL BACKGROUND EFFECT */}
-        <div className="fixed inset-0 -z-10 overflow-hidden">
+        {/* 🌌 GLOBAL BACKGROUND */}
+        <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
           
-          {/* Radial Glow */}
+          {/* Main Glow */}
           <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-emerald-500/20 blur-[120px] rounded-full" />
           
           {/* Secondary Glow */}
           <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-emerald-400/10 blur-[100px] rounded-full" />
 
-          {/* Noise / subtle overlay (optional realism) */}
-          <div className="absolute inset-0 opacity-[0.03] bg-[url('/noise.png')]" />
+          {/* OPTIONAL: remove noise to avoid 404 */}
+          {/* <div className="absolute inset-0 opacity-[0.03] bg-[url('/noise.png')]" /> */}
         </div>
 
-        {/* 📦 MAIN APP CONTAINER */}
+        {/* 📦 APP WRAPPER */}
         <div className="relative z-10 flex flex-col min-h-screen">
           
           {/* 🧭 NAVBAR */}
           <Navbar />
 
-          {/* 📄 PAGE CONTENT */}
-          <main className="flex-1 container-custom">
+          {/* 📄 MAIN CONTENT */}
+          <main className="flex-1 w-full pt-20">
             {children}
           </main>
 
