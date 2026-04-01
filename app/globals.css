@@ -1,0 +1,200 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================
+   🌍 ROOT THEME VARIABLES
+========================= */
+:root {
+  --bg-primary: #020617;
+  --bg-secondary: #0b1220;
+
+  --text-primary: #e5e7eb;
+  --text-secondary: #9ca3af;
+
+  --emerald-main: #10b981;
+  --emerald-light: #34d399;
+  --emerald-dark: #059669;
+
+  --border-color: #1f2937;
+
+  --glow-soft: 0 0 20px rgba(16, 185, 129, 0.4);
+  --glow-strong: 0 0 60px rgba(16, 185, 129, 0.7);
+}
+
+/* =========================
+   🧱 BASE STYLES
+========================= */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: radial-gradient(
+      circle at 70% 20%,
+      rgba(16, 185, 129, 0.15),
+      transparent 40%
+    ),
+    var(--bg-primary);
+  color: var(--text-primary);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--emerald-main);
+  border-radius: 10px;
+}
+
+/* Text selection */
+::selection {
+  background: var(--emerald-main);
+  color: black;
+}
+
+/* =========================
+   ✨ TEXT UTILITIES
+========================= */
+.text-gradient {
+  background: linear-gradient(
+    to right,
+    var(--emerald-main),
+    var(--emerald-light)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-muted {
+  color: var(--text-secondary);
+}
+
+/* =========================
+   💡 GLOW SYSTEM
+========================= */
+.glow-sm {
+  box-shadow: var(--glow-soft);
+}
+
+.glow-md {
+  box-shadow: 0 0 40px rgba(16, 185, 129, 0.5);
+}
+
+.glow-lg {
+  box-shadow: var(--glow-strong);
+}
+
+/* Animated glow pulse */
+.glow-pulse {
+  animation: glowPulse 2.5s infinite ease-in-out;
+}
+
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 60px rgba(16, 185, 129, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  }
+}
+
+/* =========================
+   🧊 CARD STYLES
+========================= */
+.card {
+  @apply bg-[#0b1220] border border-gray-800 rounded-2xl p-6 transition-all duration-300;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--glow-soft);
+}
+
+/* =========================
+   🔘 BUTTON STYLES
+========================= */
+.btn-primary {
+  @apply px-6 py-3 rounded-xl font-medium transition-all duration-300;
+  background: linear-gradient(
+    to right,
+    var(--emerald-main),
+    var(--emerald-light)
+  );
+  color: black;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  box-shadow: var(--glow-soft);
+}
+
+.btn-outline {
+  @apply px-6 py-3 rounded-xl border transition-all duration-300;
+  border-color: var(--emerald-main);
+  color: var(--emerald-main);
+}
+
+.btn-outline:hover {
+  background: var(--emerald-main);
+  color: black;
+  box-shadow: var(--glow-soft);
+}
+
+/* =========================
+   🧭 NAVBAR
+========================= */
+.nav-link {
+  @apply text-sm text-gray-400 transition-all duration-300;
+}
+
+.nav-link:hover {
+  color: var(--emerald-light);
+}
+
+/* =========================
+   🖼️ AVATAR (CIRCLE IMAGE)
+========================= */
+.avatar {
+  @apply rounded-full overflow-hidden border-4;
+  border-color: var(--emerald-main);
+  box-shadow: var(--glow-strong);
+}
+
+/* =========================
+   📦 SECTION SPACING
+========================= */
+.section {
+  @apply px-6 md:px-12 py-16;
+}
+
+/* =========================
+   ⚡ ANIMATIONS
+========================= */
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   📱 RESPONSIVE HELPERS
+========================= */
+.container-custom {
+  @apply max-w-7xl mx-auto;
+}
