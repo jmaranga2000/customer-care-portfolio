@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Tailwind v4 */
+@import "tailwindcss";
 
 /* =========================
    🌍 ROOT THEME VARIABLES
@@ -40,25 +39,10 @@ body {
   font-family: ui-sans-serif, system-ui, sans-serif;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--emerald-main);
-  border-radius: 10px;
-}
-
-/* Text selection */
-::selection {
-  background: var(--emerald-main);
-  color: black;
-}
-
 /* =========================
-   ✨ TEXT UTILITIES
+   ✨ UTILITIES (NO @apply)
 ========================= */
+
 .text-gradient {
   background: linear-gradient(
     to right,
@@ -88,28 +72,15 @@ body {
   box-shadow: var(--glow-strong);
 }
 
-/* Animated glow pulse */
-.glow-pulse {
-  animation: glowPulse 2.5s infinite ease-in-out;
-}
-
-@keyframes glowPulse {
-  0% {
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 60px rgba(16, 185, 129, 0.7);
-  }
-  100% {
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
-  }
-}
-
 /* =========================
-   🧊 CARD STYLES
+   🧊 CARD (REPLACED @apply)
 ========================= */
 .card {
-  @apply bg-[#0b1220] border border-gray-800 rounded-2xl p-6 transition-all duration-300;
+  background: #0b1220;
+  border: 1px solid #1f2937;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
 }
 
 .card:hover {
@@ -118,16 +89,19 @@ body {
 }
 
 /* =========================
-   🔘 BUTTON STYLES
+   🔘 BUTTONS
 ========================= */
 .btn-primary {
-  @apply px-6 py-3 rounded-xl font-medium transition-all duration-300;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
   background: linear-gradient(
     to right,
     var(--emerald-main),
     var(--emerald-light)
   );
   color: black;
+  transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
@@ -136,9 +110,11 @@ body {
 }
 
 .btn-outline {
-  @apply px-6 py-3 rounded-xl border transition-all duration-300;
-  border-color: var(--emerald-main);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--emerald-main);
   color: var(--emerald-main);
+  transition: all 0.3s ease;
 }
 
 .btn-outline:hover {
@@ -148,10 +124,12 @@ body {
 }
 
 /* =========================
-   🧭 NAVBAR
+   🧭 NAV
 ========================= */
 .nav-link {
-  @apply text-sm text-gray-400 transition-all duration-300;
+  font-size: 0.875rem;
+  color: #9ca3af;
+  transition: all 0.3s ease;
 }
 
 .nav-link:hover {
@@ -159,42 +137,40 @@ body {
 }
 
 /* =========================
-   🖼️ AVATAR (CIRCLE IMAGE)
+   🖼️ AVATAR
 ========================= */
 .avatar {
-  @apply rounded-full overflow-hidden border-4;
-  border-color: var(--emerald-main);
+  border-radius: 9999px;
+  overflow: hidden;
+  border: 4px solid var(--emerald-main);
   box-shadow: var(--glow-strong);
 }
 
 /* =========================
-   📦 SECTION SPACING
+   📦 LAYOUT HELPERS
 ========================= */
 .section {
-  @apply px-6 md:px-12 py-16;
+  padding: 4rem 1.5rem;
+}
+
+.container-custom {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 /* =========================
    ⚡ ANIMATIONS
 ========================= */
-.fade-in {
-  animation: fadeIn 1s ease-in-out;
-}
-
-@keyframes fadeIn {
+@keyframes spinSlow {
   from {
-    opacity: 0;
-    transform: translateY(30px);
+    transform: rotate(0deg);
   }
   to {
-    opacity: 1;
-    transform: translateY(0);
+    transform: rotate(360deg);
   }
 }
 
-/* =========================
-   📱 RESPONSIVE HELPERS
-========================= */
-.container-custom {
-  @apply max-w-7xl mx-auto;
+.animate-spin-slow {
+  animation: spinSlow 20s linear infinite;
 }
